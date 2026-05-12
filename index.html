@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestão financeira</title>
+    <link rel="stylesheet" href="css/style.min.css" />
+    <script src="app/index.js" type="module" defer></script>
+  </head>
+  <body>
+    <main>
+      <p>Saldo</p>
+      <h2>0,00</h2>
+    </main>
+    <form id="transaction-form">
+      <button>Despesas</button>
+      <button>Receita</button>
+      <label>
+        Valor
+        <input name="transaction-value" type="number" placeholder="0,00" />
+      </label>
+      <label>
+        Descrição
+        <input
+          name="transaction-description"
+          type="text"
+          placeholder="Ex: Lanche"
+        />
+      </label>
+      <label>
+        Categoria
+        <input
+          name="transaction-category"
+          type="text"
+          list="categories"
+          placeholder="Escolher categoria"
+        />
+        <datalist id="categories">
+          <option value="Alimentação"></option>
+          <option value="Transporte"></option>
+          <option value="Lazer"></option>
+          <option value="Saúde"></option>
+          <option value="Educação"></option>
+        </datalist>
+      </label>
+      <label>
+        Data
+        <input name="transaction-date" type="date" />
+      </label>
+      <label for="">
+        Metodo de Pagamento
+        <select name="transaction-payment" id="">
+          <option value="Pix">Pix</option>
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Cartão de Crédito">Cartão de Crédito</option>
+          <option value="Cartão de Débito">Cartão de Débito</option>
+        </select>
+      </label>
+      <button type="submit">Adicionar</button>
+    </form>
+  </body>
+</html>

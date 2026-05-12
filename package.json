@@ -1,0 +1,25 @@
+{
+  "name": "controle-financeiro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch sass/style.scss:css/style.min.css --style=compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Otavio-MBarra/controle-financeiro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Otavio-MBarra/controle-financeiro/issues"
+  },
+  "homepage": "https://github.com/Otavio-MBarra/controle-financeiro#readme",
+  "devDependencies": {
+    "sass": "^1.97.3"
+  }
+}
