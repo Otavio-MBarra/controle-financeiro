@@ -5,15 +5,17 @@ let transactions = [];
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  const data = new FormData(form);
+  const data = new FormData(event.target);
   const values = Object.fromEntries(data.entries());
-  console.log(typeof values["transaction-value"]);
+  console.log(values.typeTransaction);
+
   const transaction = new Transaction(
-    parseFloat(values["transaction-value"]),
-    values["transaction-description"],
-    values["transaction-category"],
-    values["transaction-date"],
-    values["transaction-payment"],
+    values.transactionValue,
+    values.transactionDescription,
+    values.transactionCategory,
+    values.transactionDate,
+    values.transactionPayment,
+    values.typeTransaction,
   );
   transactions.push(transaction);
   console.log(transactions);

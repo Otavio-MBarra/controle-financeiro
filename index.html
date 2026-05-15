@@ -10,19 +10,27 @@
   <body>
     <main>
       <p>Saldo</p>
-      <h2>0,00</h2>
+      <h2>0,20</h2>
     </main>
     <form id="transaction-form">
-      <button>Despesas</button>
-      <button>Receita</button>
+      <label>
+        <input type="radio" name="typeTransaction" value="expense" id="" />
+        <span>Despesas</span>
+      </label>
+
+      <label>
+        <input type="radio" name="typeTransaction" value="income" id="" />
+        <span>Receita</span>
+      </label>
+
       <label>
         Valor
-        <input name="transaction-value" type="number" placeholder="0,00" />
+        <input name="transactionValue" type="number" placeholder="0,00" />
       </label>
       <label>
         Descrição
         <input
-          name="transaction-description"
+          name="transactionDescription"
           type="text"
           placeholder="Ex: Lanche"
         />
@@ -30,7 +38,7 @@
       <label>
         Categoria
         <input
-          name="transaction-category"
+          name="transactionCategory"
           type="text"
           list="categories"
           placeholder="Escolher categoria"
@@ -45,11 +53,11 @@
       </label>
       <label>
         Data
-        <input name="transaction-date" type="date" />
+        <input name="transactionDate" type="date" />
       </label>
       <label for="">
         Metodo de Pagamento
-        <select name="transaction-payment" id="">
+        <select name="transactionPayment" id="">
           <option value="Pix">Pix</option>
           <option value="Dinheiro">Dinheiro</option>
           <option value="Cartão de Crédito">Cartão de Crédito</option>
