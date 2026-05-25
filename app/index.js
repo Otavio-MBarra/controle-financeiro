@@ -1,7 +1,12 @@
 import Transaction from "./Transaction.js";
 
 const form = document.getElementById("transaction-form");
-let transactions = [];
+let getTransationsJSON = localStorage.getItem("transactions");
+let transactions = JSON.parse(getTransationsJSON) || [];
+const cleanBtn = document.getElementById("clean-local");
+cleanBtn.addEventListener("click", () => {
+  localStorage.clear();
+});
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -18,5 +23,7 @@ form.addEventListener("submit", (event) => {
     values.typeTransaction,
   );
   transactions.push(transaction);
+  localStorage.setItem("transactions", JSON.stringify(transactions));
   console.log(transactions);
 });
+console.log(transactions);
