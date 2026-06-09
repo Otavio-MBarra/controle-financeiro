@@ -33,21 +33,36 @@ form.addEventListener("submit", (event) => {
     values.transactionPayment,
     values.typeTransaction,
   );
-  transactions.push(transaction);
+  transactions.unshift(transaction);
   localStorage.setItem("transactions", JSON.stringify(transactions));
   console.log(transactions);
 });
 
-transactions.forEach((transaction) => {
-  transactionsList.innerHTML = `<div class="recordedTransaction">
-        <img src="https://picsum.photos" alt="" />
-        <div class="descriptionTransaction">
-          <p class="descriptionTransactionText">${transaction.description}</p>
-          <p class="transactionDate">${transaction.date}</p>
-          <p class="transactionCategory">${transaction.category}</p>
-        </div>
-        <p class="transactionValueText">${transaction.value}</p>
-      </div>`;
-});
+// transactions.forEach((transaction) => {
+//   transactionsList.innerHTML = `<div class="recordedTransaction">
+//         <img src="https://picsum.photos" alt="" />
+//         <div class="descriptionTransaction">
+//           <p class="descriptionTransactionText">${transaction.description}</p>
+//           <p class="transactionDate">${transaction.date}</p>
+//           <p class="transactionCategory">${transaction.category}</p>
+//         </div>
+//         <p class="transactionValueText">${transaction.value}</p>
+//       </div>`;
+// });
 
-transactions.reduce((acc, curent) => {});
+let teste = transactions.reduce((acc, curent) => {
+  return (
+    acc +
+    ` <div class="recordedTransaction">
+         <img src="https://picsum.photos" alt="" />
+         <div class="descriptionTransaction">
+           <p class="descriptionTransactionText">${curent.description}</p>
+           <p class="transactionDate">${curent.date}</p>
+           <p class="transactionCategory">${curent.category}</p>
+         </div>
+         <p class="transactionValueText">${curent.value}</p>
+       </div>`
+  );
+}, ``);
+
+transactionsList.innerHTML = teste;
