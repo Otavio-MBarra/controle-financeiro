@@ -1,13 +1,17 @@
 import Transaction from "./Transaction.js";
 import transactionRenderer from "./TransactionRenderer.js";
+import balanceRenderer from "./BalanceRenderer.js";
 
 const form = document.getElementById("transaction-form");
 let getTransationsJSON = localStorage.getItem("transactions");
 let transactions = JSON.parse(getTransationsJSON) || [];
 const transactionsList = document.querySelector(".transactionsList");
+const h2ShowBalance = document.querySelector(".showBalance");
+
 const cleanBtn = document.getElementById("clean-local");
 cleanBtn.addEventListener("click", () => {
   localStorage.clear();
+  transactionRenderer();
 });
 
 form.addEventListener("submit", (event) => {
@@ -27,6 +31,8 @@ form.addEventListener("submit", (event) => {
   transactions.unshift(transaction);
   localStorage.setItem("transactions", JSON.stringify(transactions));
   transactionRenderer(transactions, transactionsList);
+  balanceRenderer(transactions, h2ShowBalance);
 });
 
 transactionRenderer(transactions, transactionsList);
+balanceRenderer(transactions, h2ShowBalance);
