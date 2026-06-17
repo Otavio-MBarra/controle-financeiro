@@ -1,4 +1,5 @@
 import Transaction from "./Transaction.js";
+import transactionRenderer from "./TransactionRenderer.js";
 
 const form = document.getElementById("transaction-form");
 let getTransationsJSON = localStorage.getItem("transactions");
@@ -8,16 +9,6 @@ const cleanBtn = document.getElementById("clean-local");
 cleanBtn.addEventListener("click", () => {
   localStorage.clear();
 });
-
-// transactionsList.innerHTML = `<div class="recordedTransaction">
-//         <img src="https://picsum.photos" alt="" />
-//         <div class="descriptionTransaction">
-//           <p class="descriptionTransactionText">salario</p>
-//           <p class="transactionDate">25 jun</p>
-//           <p class="transactionCategory">lazer</p>
-//         </div>
-//         <p class="transactionValueText">+R$ 1000,00</p>
-//       </div>`;
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -35,34 +26,7 @@ form.addEventListener("submit", (event) => {
   );
   transactions.unshift(transaction);
   localStorage.setItem("transactions", JSON.stringify(transactions));
-  console.log(transactions);
+  transactionRenderer(transactions, transactionsList);
 });
 
-// transactions.forEach((transaction) => {
-//   transactionsList.innerHTML = `<div class="recordedTransaction">
-//         <img src="https://picsum.photos" alt="" />
-//         <div class="descriptionTransaction">
-//           <p class="descriptionTransactionText">${transaction.description}</p>
-//           <p class="transactionDate">${transaction.date}</p>
-//           <p class="transactionCategory">${transaction.category}</p>
-//         </div>
-//         <p class="transactionValueText">${transaction.value}</p>
-//       </div>`;
-// });
-
-let teste = transactions.reduce((acc, curent) => {
-  return (
-    acc +
-    ` <div class="recordedTransaction">
-         <img src="https://picsum.photos" alt="" />
-         <div class="descriptionTransaction">
-           <p class="descriptionTransactionText">${curent.description}</p>
-           <p class="transactionDate">${curent.date}</p>
-           <p class="transactionCategory">${curent.category}</p>
-         </div>
-         <p class="transactionValueText">${curent.value}</p>
-       </div>`
-  );
-}, ``);
-
-transactionsList.innerHTML = teste;
+transactionRenderer(transactions, transactionsList);
