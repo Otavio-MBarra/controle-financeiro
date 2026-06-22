@@ -7,12 +7,16 @@ let getTransationsJSON = localStorage.getItem("transactions");
 let transactions = JSON.parse(getTransationsJSON) || [];
 const transactionsList = document.querySelector(".transactionsList");
 const h2ShowBalance = document.querySelector(".showBalance");
+const pMonthlyExpenseValue = document.querySelector(".monthly-expenses-value");
+const pRecipeMonthValue = document.querySelector(".recipe-month-value");
 
 const cleanBtn = document.getElementById("clean-local");
 cleanBtn.addEventListener("click", () => {
   localStorage.clear();
   transactionRenderer();
 });
+
+// let transactionValues = balanceRenderer(transactions);
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -31,8 +35,18 @@ form.addEventListener("submit", (event) => {
   transactions.unshift(transaction);
   localStorage.setItem("transactions", JSON.stringify(transactions));
   transactionRenderer(transactions, transactionsList);
-  balanceRenderer(transactions, h2ShowBalance);
+  balanceRenderer(
+    transactions,
+    h2ShowBalance,
+    pMonthlyExpenseValue,
+    pRecipeMonthValue,
+  );
 });
 
 transactionRenderer(transactions, transactionsList);
-balanceRenderer(transactions, h2ShowBalance);
+balanceRenderer(
+  transactions,
+  h2ShowBalance,
+  pMonthlyExpenseValue,
+  pRecipeMonthValue,
+);

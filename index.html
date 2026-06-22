@@ -10,8 +10,15 @@
   <body>
     <button id="clean-local">limpar local</button>
     <main>
-      <p>Saldo</p>
+      <p>Saldo do mês</p>
       <h2 class="showBalance">0,20</h2>
+
+      <div class="recipe-month">
+        <p class="recipe-month-value">0,00</p>
+      </div>
+      <div class="monthly-expenses">
+        <p class="monthly-expenses-value">0,00</p>
+      </div>
     </main>
     <form id="transaction-form">
       <label>
@@ -60,6 +67,7 @@
         Metodo de Pagamento
         <select name="transactionPayment" id="">
           <option value="Pix">Pix</option>
+          x
           <option value="Dinheiro">Dinheiro</option>
           <option value="Cartão de Crédito">Cartão de Crédito</option>
           <option value="Cartão de Débito">Cartão de Débito</option>
