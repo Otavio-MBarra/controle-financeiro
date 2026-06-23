@@ -16,13 +16,10 @@ cleanBtn.addEventListener("click", () => {
   transactionRenderer();
 });
 
-// let transactionValues = balanceRenderer(transactions);
-
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const data = new FormData(event.target);
   const values = Object.fromEntries(data.entries());
-  console.log(values.typeTransaction);
 
   const transaction = new Transaction(
     values.transactionValue,
