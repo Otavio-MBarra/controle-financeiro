@@ -67,12 +67,35 @@
         Metodo de Pagamento
         <select name="transactionPayment" id="">
           <option value="Pix">Pix</option>
-          x
           <option value="Dinheiro">Dinheiro</option>
           <option value="Cartão de Crédito">Cartão de Crédito</option>
           <option value="Cartão de Débito">Cartão de Débito</option>
         </select>
       </label>
+      <fieldset class="modal-installment" hidden>
+        <legend>Compra é parcelada?</legend>
+        <label>
+          <input type="radio" name="transactionInstallment" value="yes" />
+          <span>Sim</span>
+        </label>
+        <label>
+          <input type="radio" value="no" name="transactionInstallment" />
+          <span>Não</span>
+        </label>
+
+        <label id="installment-count-wrapper" hidden>
+          Quantidade de parcelas
+          <input
+            name="transactionInstallmentCount"
+            id="installment-count"
+            type="number"
+            min="1"
+            max="12"
+            value="1"
+          />
+        </label>
+      </fieldset>
+
       <button type="submit">Adicionar</button>
     </form>
 
