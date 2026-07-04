@@ -47,17 +47,47 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   const data = new FormData(event.target);
   const values = Object.fromEntries(data.entries());
-  console.log(data);
-  console.log(values);
+  // console.log(data);
+  // console.log(values);
 
-  const transaction = new Transaction(
-    values.transactionValue,
-    values.transactionDescription,
-    values.transactionCategory,
-    values.transactionDate,
-    values.transactionPayment,
-    values.typeTransaction,
-  );
+  function idGenerator() {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let id = "";
+
+    for (let i = 0; i < 4; i++) {
+      id += chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    return id;
+  }
+  let transaction;
+
+  if (values.transactionPayment === "Cartão de Crédito") {
+    transaction = new Transaction(
+      values.transactionValue / values.transactionInstallmentCount,
+      values.transactionDescription,
+      values.transactionCategory,
+      values.transactionDate,
+      values.transactionPayment,
+      values.typeTransaction,
+      values.transactionInstallmentCount,
+      1, //criiar função que acrescenta 1 ate chegar o maximo
+      values.transactionValue,
+      idGenerator(),
+    );
+  } else {
+    transaction = new Transaction(
+      values.transactionValue,
+      values.transactionDescription,
+      values.transactionCategory,
+      values.transactionDate,
+      values.transactionPayment,
+      values.typeTransaction,
+    );
+  }
+
+  console.log(transaction);
+
   transactions.unshift(transaction);
   localStorage.setItem("transactions", JSON.stringify(transactions));
   transactionRenderer(transactions, transactionsList);
