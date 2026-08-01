@@ -43,7 +43,25 @@ function toggleHidden(element, criteri, toggleElement) {
     toggleElement.hidden = true;
   }
 }
-
+transactionsList.addEventListener("click", (evento) => {
+  const btn = evento.target.closest("button");
+  if (!btn || !transactionsList.contains(btn)) return;
+  if (btn.classList.contains("teste-excluir")) {
+    const record = btn.closest(".recordedTransaction");
+    const id = record?.dataset.idtransaction;
+    transactions = transactions.filter(
+      (t) => String(t.installmentGroupId) !== String(id),
+    );
+    saveTransaction(transactions);
+    loadData(
+      transactions,
+      transactionsList,
+      h2ShowBalance,
+      pMonthlyExpenseValue,
+      pRecipeMonthValue,
+    );
+  }
+});
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   transactionService(event, transactions);
@@ -55,7 +73,6 @@ form.addEventListener("submit", (event) => {
     pMonthlyExpenseValue,
     pRecipeMonthValue,
   );
-  console.log(transactions);
 });
 
 function loadData(

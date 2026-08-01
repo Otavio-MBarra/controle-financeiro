@@ -1,16 +1,16 @@
 export default class Transaction {
-  constructor(
+  constructor({
     value,
     description,
     category,
     date,
     payment,
     incomeexpense,
-    installmentTotal,
-    installmentNumber,
-    totalValue,
-    installmentGroupId,
-  ) {
+    installmentTotal = null,
+    installmentNumber = null,
+    totalValue = null,
+    installmentGroupId = null,
+  }) {
     this.value = value;
     this.description = description;
     this.category = category;

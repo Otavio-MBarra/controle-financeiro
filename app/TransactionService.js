@@ -19,29 +19,30 @@ export default function transactionService(dataForm, transactions) {
 
   if (values.transactionPayment === "Cartão de Crédito") {
     for (let i = 1; i <= values.transactionInstallmentCount; i++) {
-      transaction = new Transaction(
-        values.transactionValue / values.transactionInstallmentCount,
-        values.transactionDescription,
-        values.transactionCategory,
-        values.transactionDate,
-        values.transactionPayment,
-        values.typeTransaction,
-        values.transactionInstallmentCount,
-        i,
-        values.transactionValue,
-        groupId,
-      );
+      transaction = new Transaction({
+        value: values.transactionValue / values.transactionInstallmentCount,
+        description: values.transactionDescription,
+        category: values.transactionCategory,
+        date: values.transactionDate,
+        payment: values.transactionPayment,
+        incomeexpense: values.typeTransaction,
+        installmentTotal: values.transactionInstallmentCount,
+        installmentNumber: i,
+        totalValue: values.transactionValue,
+        installmentGroupId: groupId,
+      });
       transactions.push(transaction);
     }
   } else {
-    transaction = new Transaction(
-      values.transactionValue,
-      values.transactionDescription,
-      values.transactionCategory,
-      values.transactionDate,
-      values.transactionPayment,
-      values.typeTransaction,
-    );
+    transaction = new Transaction({
+      value: values.transactionValue,
+      description: values.transactionDescription,
+      category: values.transactionCategory,
+      date: values.transactionDate,
+      payment: values.transactionPayment,
+      incomeexpense: values.typeTransaction,
+      installmentGroupId: groupId,
+    });
     transactions.unshift(transaction);
   }
 }
