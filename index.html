@@ -8,95 +8,176 @@
     <script src="app/index.js" type="module" defer></script>
   </head>
   <body>
-    <button id="clean-local">limpar local</button>
-    <main>
-      <p>Saldo do mês</p>
-      <h2 class="showBalance">0,20</h2>
+    <main class="dashboard">
+      <header class="dashboard-header">
+        <div class="balance-overview">
+          <p class="balance-label">Saldo total</p>
+          <h1 class="showBalance">R$ 0,00</h1>
+        </div>
+      </header>
 
-      <div class="recipe-month">
-        <p class="recipe-month-value">0,00</p>
-      </div>
-      <div class="monthly-expenses">
-        <p class="monthly-expenses-value">0,00</p>
-      </div>
+      <section class="summary-grid" aria-label="Resumo financeiro">
+        <article class="summary-card income-card">
+          <div>
+            <p class="summary-label">Receitas</p>
+            <p class="recipe-month-value summary-value">R$ 0,00</p>
+          </div>
+          <span class="summary-icon" aria-hidden="true">↗</span>
+        </article>
+        <article class="summary-card expense-card">
+          <div>
+            <p class="summary-label">Despesas</p>
+            <p class="monthly-expenses-value summary-value">R$ 0,00</p>
+          </div>
+          <span class="summary-icon" aria-hidden="true">↘</span>
+        </article>
+        <article class="summary-card count-card">
+          <div>
+            <p class="summary-label">Transações</p>
+            <p class="transactions-count summary-value">0</p>
+          </div>
+          <span class="summary-icon" aria-hidden="true">▤</span>
+        </article>
+      </section>
+
+      <section class="transactions-section">
+        <div class="section-heading">
+          <div>
+            <p class="section-eyebrow">Movimentações</p>
+            <h2>Transações</h2>
+          </div>
+          <button
+            class="add-transaction-button"
+            id="open-transaction-modal"
+            type="button"
+          >
+            <span aria-hidden="true">+</span>
+            Adicionar
+          </button>
+        </div>
+        <section
+          class="transactionsList"
+          aria-live="polite"
+          aria-label="Lista de transações"
+        ></section>
+      </section>
     </main>
-    <form id="transaction-form">
-      <label>
-        <input type="radio" name="typeTransaction" value="expense" id="" />
-        <span>Despesas</span>
-      </label>
 
-      <label>
-        <input type="radio" name="typeTransaction" value="income" id="" />
-        <span>Receita</span>
-      </label>
+    <dialog
+      class="transaction-dialog"
+      id="transaction-dialog"
+      aria-labelledby="form-title"
+    >
+      <form id="transaction-form">
+        <div class="dialog-heading">
+          <div>
+            <p class="section-eyebrow">Nova movimentação</p>
+            <h2 id="form-title">Adicionar transação</h2>
+          </div>
+          <button
+            class="close-dialog"
+            type="button"
+            aria-label="Fechar formulário"
+          >
+            ×
+          </button>
+        </div>
 
-      <label>
-        Valor
-        <input name="transactionValue" type="number" placeholder="0,00" />
-      </label>
-      <label>
-        Descrição
-        <input
-          name="transactionDescription"
-          type="text"
-          placeholder="Ex: Lanche"
-        />
-      </label>
-      <label>
-        Categoria
-        <input
-          name="transactionCategory"
-          type="text"
-          list="categories"
-          placeholder="Escolher categoria"
-        />
-        <datalist id="categories">
-          <option value="Alimentação"></option>
-          <option value="Transporte"></option>
-          <option value="Lazer"></option>
-          <option value="Saúde"></option>
-          <option value="Educação"></option>
-        </datalist>
-      </label>
-      <label>
-        Data
-        <input name="transactionDate" type="date" />
-      </label>
-      <label for="">
-        Metodo de Pagamento
-        <select name="transactionPayment" id="">
-          <option value="Pix">Pix</option>
-          <option value="Dinheiro">Dinheiro</option>
-          <option value="Cartão de Crédito">Cartão de Crédito</option>
-          <option value="Cartão de Débito">Cartão de Débito</option>
-        </select>
-      </label>
-      <fieldset class="modal-installment" hidden>
-        <legend>Compra é parcelada?</legend>
-        <label>
-          <input type="radio" name="transactionInstallment" value="yes" />
-          <span>Sim</span>
-        </label>
-        <label>
-          <input type="radio" value="no" name="transactionInstallment" />
-          <span>Não</span>
-        </label>
+        <fieldset class="transaction-type">
+          <legend>Tipo</legend>
+          <label>
+            <input
+              type="radio"
+              name="typeTransaction"
+              value="expense"
+              required
+            />
+            <span>Despesa</span>
+          </label>
+          <label>
+            <input type="radio" name="typeTransaction" value="income" />
+            <span>Receita</span>
+          </label>
+        </fieldset>
 
-        <label id="installment-count-wrapper" hidden>
-          Quantidade de parcelas
-          <input
-            name="transactionInstallmentCount"
-            id="installment-count"
-            type="number"
-            value="3"
-          />
-        </label>
-      </fieldset>
+        <div class="form-grid">
+          <label class="form-field">
+            Valor
+            <input
+              name="transactionValue"
+              type="number"
+              min="0.01"
+              step="0.01"
+              placeholder="0,00"
+              required
+            />
+          </label>
+          <label class="form-field">
+            Descrição
+            <input
+              name="transactionDescription"
+              type="text"
+              placeholder="Ex: Lanche"
+              required
+            />
+          </label>
+          <label class="form-field">
+            Categoria
+            <input
+              name="transactionCategory"
+              type="text"
+              list="categories"
+              placeholder="Escolher categoria"
+              required
+            />
+            <datalist id="categories">
+              <option value="Alimentação"></option>
+              <option value="Transporte"></option>
+              <option value="Lazer"></option>
+              <option value="Saúde"></option>
+              <option value="Educação"></option>
+            </datalist>
+          </label>
+          <label class="form-field">
+            Data
+            <input name="transactionDate" type="date" required />
+          </label>
+          <label class="form-field form-field-full">
+            Método de pagamento
+            <select name="transactionPayment">
+              <option value="Pix">Pix</option>
+              <option value="Dinheiro">Dinheiro</option>
+              <option value="Cartão de Crédito">Cartão de Crédito</option>
+              <option value="Cartão de Débito">Cartão de Débito</option>
+            </select>
+          </label>
+        </div>
 
-      <button type="submit">Adicionar</button>
-    </form>
+        <fieldset class="modal-installment" hidden>
+          <legend>Compra parcelada?</legend>
+          <label
+            ><input type="radio" name="transactionInstallment" value="yes" />
+            Sim</label
+          >
+          <label
+            ><input type="radio" value="no" name="transactionInstallment" />
+            Não</label
+          >
+          <label class="form-field" id="installment-count-wrapper" hidden>
+            Quantidade de parcelas
+            <input
+              name="transactionInstallmentCount"
+              id="installment-count"
+              type="number"
+              min="2"
+            />
+          </label>
+        </fieldset>
 
-    <section class="transactionsList"></section>
+        <button class="submit-transaction" type="submit">
+          Salvar transação
+        </button>
+      </form>
+    </dialog>
   </body>
 </html>

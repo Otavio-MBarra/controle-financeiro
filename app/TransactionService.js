@@ -11,9 +11,7 @@ function idGenerator() {
   return id;
 }
 
-export default function transactionService(dataForm, transactions) {
-  const data = new FormData(dataForm.target);
-  const values = Object.fromEntries(data.entries());
+export default function createTransaction(values, transactions) {
   let transaction;
   const groupId = idGenerator();
 

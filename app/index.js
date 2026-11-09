@@ -1,6 +1,6 @@
 import transactionRenderer from "./TransactionRenderer.js";
 import balanceRenderer from "./BalanceRenderer.js";
-import transactionService from "./TransactionService.js";
+import createTransaction from "./TransactionService.js";
 import saveTransaction from "./SaveTransaction.js";
 
 const form = document.getElementById("transaction-form");
@@ -10,6 +10,10 @@ const transactionsList = document.querySelector(".transactionsList");
 const h2ShowBalance = document.querySelector(".showBalance");
 const pMonthlyExpenseValue = document.querySelector(".monthly-expenses-value");
 const pRecipeMonthValue = document.querySelector(".recipe-month-value");
+const transactionsCount = document.querySelector(".transactions-count");
+const transactionDialog = document.getElementById("transaction-dialog");
+const openTransactionModal = document.getElementById("open-transaction-modal");
+const closeTransactionModal = document.querySelector(".close-dialog");
 
 const radioOptions = document.querySelectorAll(
   "input[name='transactionInstallment']",
@@ -19,12 +23,6 @@ const credCardOption = document.querySelector(
 );
 const inputInstalment = document.getElementById("installment-count-wrapper");
 const showInstallmentModal = document.querySelector(".modal-installment");
-
-const cleanBtn = document.getElementById("clean-local");
-cleanBtn.addEventListener("click", () => {
-  localStorage.clear();
-  transactionRenderer();
-});
 
 credCardOption.addEventListener("change", (element) => {
   toggleHidden(element, "Cartão de Crédito", showInstallmentModal);
@@ -64,8 +62,14 @@ transactionsList.addEventListener("click", (evento) => {
 });
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  transactionService(event, transactions);
+  const data = new FormData(event.target);
+  const values = Object.fromEntries(data.entries());
+  createTransaction(values, transactions);
   saveTransaction(transactions);
+  form.reset();
+  showInstallmentModal.hidden = true;
+  inputInstalment.hidden = true;
+  transactionDialog.close();
   loadData(
     transactions,
     transactionsList,
@@ -89,7 +93,20 @@ function loadData(
     pMonthlyExpenseValue,
     pRecipeMonthValue,
   );
+  transactionsCount.textContent = transactions.length;
 }
+
+openTransactionModal.addEventListener("click", () => {
+  transactionDialog.showModal();
+});
+
+closeTransactionModal.addEventListener("click", () => {
+  transactionDialog.close();
+});
+
+transactionDialog.addEventListener("click", (event) => {
+  if (event.target === transactionDialog) transactionDialog.close();
+});
 
 loadData(
   transactions,

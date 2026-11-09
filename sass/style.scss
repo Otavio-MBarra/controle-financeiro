@@ -1,1 +1,431 @@
-    
+$color-ink: #172334;
+$color-muted: #748196;
+$color-green: #17815f;
+$color-green-soft: #e8f4ef;
+$color-red: #bd4350;
+$color-red-soft: #f9ebed;
+$color-line: #e4e9ef;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #f4f6f8;
+  color: $color-ink;
+  font-family: "Aptos", "Segoe UI", sans-serif;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.dashboard-header {
+  min-height: 330px;
+  padding: 2rem 1.5rem 5.5rem;
+  background: #1c293b;
+  color: #fff;
+  text-align: center;
+}
+
+.balance-overview {
+  margin-top: 2rem;
+}
+
+.balance-label {
+  margin: 0 0 0.25rem;
+  color: #aab5c5;
+  font-size: 0.95rem;
+}
+
+.showBalance {
+  margin: 0;
+  color: #3a9b78;
+  font-size: 3.75rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.showBalance.is-negative {
+  color: #d66b75;
+}
+
+.summary-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  width: min(1120px, calc(100% - 3rem));
+  margin: -4rem auto 0;
+}
+
+.summary-card {
+  display: flex;
+  min-height: 132px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 1.75rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgb(23 35 52 / 10%);
+}
+
+.income-card {
+  background: #168260;
+  color: #fff;
+}
+
+.expense-card {
+  background: #bd4350;
+  color: #fff;
+}
+
+.count-card {
+  background: #fff;
+  color: $color-ink;
+}
+
+.summary-label {
+  margin: 0 0 0.35rem;
+  color: inherit;
+  font-size: 0.95rem;
+  opacity: 0.78;
+}
+
+.summary-value {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.summary-icon {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  place-items: center;
+  border-radius: 14px;
+  background: rgb(255 255 255 / 18%);
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.count-card .summary-icon {
+  background: #eef2f6;
+  color: #536176;
+}
+
+.transactions-section {
+  width: min(1120px, calc(100% - 3rem));
+  margin: 2.5rem auto 4rem;
+}
+
+.section-heading,
+.dialog-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.section-eyebrow {
+  margin: 0 0 0.3rem;
+  color: $color-muted;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.section-heading h2,
+.dialog-heading h2 {
+  margin: 0;
+  font-size: 1.45rem;
+}
+
+.add-transaction-button,
+.submit-transaction {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 9px;
+  background: $color-green;
+  color: #fff;
+  font-weight: 600;
+}
+
+.add-transaction-button span {
+  font-size: 1.35rem;
+  line-height: 0.8;
+}
+
+.transactionsList {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.empty-state {
+  margin: 0;
+  padding: 2.5rem 1rem;
+  border: 1px dashed #cbd3dd;
+  border-radius: 12px;
+  color: $color-muted;
+  text-align: center;
+}
+
+.recordedTransaction {
+  display: grid;
+  grid-template-columns: 4px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 1rem;
+  min-height: 92px;
+  padding: 1rem 1.1rem;
+  border: 1px solid $color-line;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.recordedTransaction::before {
+  width: 4px;
+  height: 48px;
+  border-radius: 4px;
+  background: $color-green;
+  content: "";
+}
+
+.recordedTransaction.is-expense::before {
+  background: $color-red;
+}
+
+.descriptionTransactionText,
+.transactionDate,
+.transactionCategory {
+  margin: 0;
+}
+
+.descriptionTransactionText {
+  font-weight: 650;
+}
+
+.transaction-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  margin-top: 0.25rem;
+  color: $color-muted;
+  font-size: 0.82rem;
+}
+
+.transactionValueText {
+  margin: 0;
+  color: $color-green;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.is-expense .transactionValueText {
+  color: $color-red;
+}
+
+.teste-excluir {
+  padding: 0.45rem 0.65rem;
+  border: 1px solid $color-line;
+  border-radius: 7px;
+  background: #fff;
+  color: $color-muted;
+}
+
+.transaction-dialog {
+  width: min(560px, calc(100% - 2rem));
+  max-height: min(90vh, 760px);
+  padding: 1.5rem;
+  overflow: auto;
+  border: 0;
+  border-radius: 14px;
+  background: #fff;
+  color: $color-ink;
+  box-shadow: 0 24px 80px rgb(11 22 37 / 25%);
+}
+
+.transaction-dialog::backdrop {
+  background: rgb(14 24 38 / 58%);
+}
+
+.close-dialog {
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 8px;
+  background: #f0f3f6;
+  color: $color-ink;
+  font-size: 1.5rem;
+}
+
+.transaction-type,
+.modal-installment {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1.25rem 0;
+  padding: 0;
+  border: 0;
+}
+
+.transaction-type legend,
+.modal-installment legend {
+  width: 100%;
+  margin-bottom: 0.6rem;
+  color: $color-muted;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.transaction-type label {
+  flex: 1;
+}
+
+.transaction-type input {
+  position: absolute;
+  opacity: 0;
+}
+
+.transaction-type span,
+.modal-installment > label:not(.form-field) {
+  display: block;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid $color-line;
+  border-radius: 8px;
+  color: $color-muted;
+  text-align: center;
+  cursor: pointer;
+}
+
+.transaction-type input:checked + span {
+  border-color: $color-red;
+  background: $color-red-soft;
+  color: $color-red;
+}
+
+.transaction-type label:has(input[value="income"]:checked) span {
+  border-color: $color-green;
+  background: $color-green-soft;
+  color: $color-green;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.form-field {
+  display: grid;
+  gap: 0.45rem;
+  color: #526075;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.form-field-full {
+  grid-column: 1 / -1;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #d6dde5;
+  border-radius: 7px;
+  background: #fff;
+  color: $color-ink;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  outline: 2px solid rgb(23 129 95 / 22%);
+  border-color: $color-green;
+}
+
+.modal-installment .form-field {
+  width: 100%;
+}
+
+.submit-transaction {
+  width: 100%;
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 700px) {
+  .showBalance {
+    font-size: 2.75rem;
+  }
+
+  .summary-value {
+    font-size: 1.65rem;
+  }
+
+  .dashboard-header {
+    min-height: 300px;
+    padding-inline: 1rem;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    width: calc(100% - 2rem);
+    margin-top: -3.25rem;
+  }
+
+  .summary-card {
+    min-height: 102px;
+    padding: 1.1rem 1.25rem;
+  }
+
+  .transactions-section {
+    width: calc(100% - 2rem);
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .recordedTransaction {
+    grid-template-columns: 4px minmax(0, 1fr) auto;
+    gap: 0.7rem;
+  }
+
+  .transactionValueText {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .teste-excluir {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading h2 {
+    font-size: 1.25rem;
+  }
+
+  .add-transaction-button {
+    padding-inline: 0.75rem;
+  }
+}
